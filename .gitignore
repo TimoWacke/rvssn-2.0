@@ -1,8 +1,5 @@
 .env
 node_modules
+files
 *.psd
 *.psb
-*.pdf
-mockup
-img
-doc
