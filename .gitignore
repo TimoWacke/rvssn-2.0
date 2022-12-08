@@ -6,3 +6,4 @@ files
 mockup/3d
 img/collection/*
 img/gallery/*
+package*.json
