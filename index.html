@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RVSSN | Segeln Südniedersachsen</title>
+    <link rel="stylesheet" href="/css">
+</head>
+
+<body onload='onLoad()'>
+    <div id="header">
+        <div id="logoside">
+            <img src="/icons/logo-blue.svg" alt="logo" class="logo">
+            <h1>
+                Regionalverband Segeln
+                Südniedersachsen
+            </h1>
+        </div>
+
+        <div id="menu">
+            <div id="navbar">
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="main">
+        <div id="hero">
+            <h1 id="heroH">Deine Region. Dein Sport.</h1>
+        </div>
+        <div class="container">
+            <div class="horizontal">
+                <h1 draggable="true" id="topper"></h1>
+                <div id="lottie" style="display:none"></div>
+                <script src="/icons/lottie.js"></script>
+            </div>
+
+            <div id="articles">
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div>
+            <a href="https://www.facebook.com/Regionalverband-Segeln-S%C3%BCdniedersachsen-RVSSN-284269285349824/"
+                class="facebook">RVSSN auf Facebook</a>
+            <a href="/impressum">Impressum</a>
+        </div>
+        <div>
+            <a href="/dev">Entwickler</a>
+            <p>© 2021 by Timo Wacke</p>
+        </div>
+    </div>
+</body>
+<script>
+
+    var url;
+    var currentsite;
+    var touch;
+    function onLoad() {
+        document.getElementById("navbar").innerHTML = "";
+        for (i in Object.keys(dictionary)) {
+            document.getElementById("navbar").innerHTML += "<button id='" +
+                Object.keys(dictionary)[i] + "' onclick=page('" + Object.keys(dictionary)[i] + "')>" +
+                dictionary[Object.keys(dictionary)[i]][0] + "</button>";
+        }
+        url = window.location.href
+        var b = getIdIndex(url, "?");
+        if (b > -1) {
+            currentsite = url.substring(b, url.length);
+            page(currentsite)
+        } else {
+            currentsite = 'start'
+            page(currentsite)
+        }
+        touch = setTimeout(function () {
+            if (window.innerWidth < 1300) {
+                document.getElementById('lottie').style.display = 'block'
+            }
+        }, 4500)
+    }
+    setTimeout(function () { document.getElementById('lottie').style.display = 'none' }, 30000)
+
+
+
+    function getIdIndex(wort, a) {
+        for (b in wort) {
+            if (wort[b] == a) {
+                return parseInt(b) + 1;
+            }
+        }
+        return -1;
+    }
+
+    const dictionary = {
+        "start": ["Start", "Deine Region. Dein Sport.", "Aktuelles"],
+        "about": ["Über uns", "Süd-Niedersachsen", "Das sind wir"],
+        "dates": ["Termine", "das steht an", "Termine"],
+        "gallery": ["Gallerie", "die besten Augenblicke", "unsere Fotos"],
+        "contact": ["Kontakt", "für einander da", "Kontaktiere uns"],
+
+    }
+
+    function page(site) {
+        var newurl = window.location.protocol + "//" + window.location.host + '?' + site;
+        window.history.pushState({ path: newurl }, '', newurl);
+        document.getElementById('articles').innerHTML = ""
+        document.getElementById("start").classList.remove("current");
+        currents = document.getElementsByClassName("current");
+        [].forEach.call(currents, function (elem) {
+            elem.classList.remove("current")
+        });
+        document.getElementById(site).classList.add("current")
+        document.getElementById("hero").style.background = "url(../img/banner/" + site + ".jpg)";
+        document.getElementById("hero").style.backgroundSize = "cover";
+        document.getElementById("hero").style.backgroundPosition = "bottom center";
+        document.getElementById("heroH").innerHTML = dictionary[site][1];
+        if (window.innerWidth < 800) {
+            document.getElementById("topper").innerHTML = dictionary[site][0];
+        } else {
+            document.getElementById("topper").innerHTML = dictionary[site][2];
+        }
+        var address = window.location.protocol + "//" + window.location.host + '/items/' + site;
+        requestGetJSON(address, function (items) {
+            document.getElementById("articles").innerHTML = "";
+            for (i in items) {
+
+                if (items[i].pdf) {
+                    document.getElementById("articles").innerHTML += '<div class="item-wrapper"><img src="img/collection/' + items[i].img + '" alt="" class="itemimg"><div class="content"><div class="details"><p class="category">'
+                        + items[i].category + '</p><p class="date">' + items[i].date + '</p></div><h2>' + items[i].header + '</h2><p class="description">' + items[i].text + '</p><a href="/file/' + items[i].pdf + '">weiterlesen...</a></div></div>'
+                } else {
+                    document.getElementById("articles").innerHTML += '<div class="item-wrapper"><img src="img/collection/' + items[i].img + '" alt="" class="itemimg"><div class="content"><div class="details"><p class="category">'
+                        + items[i].category + '</p><p class="date">' + items[i].date + '</p></div><h2>' + items[i].header + '</h2><p class="description">' + items[i].text + '</p></div></div>'
+                }
+            }
+
+        });
+        setTimeout(function () { document.getElementById("footer").style.display = "flex" }, 1000)
+    }
+
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchmove', handleTouchMove, false);
+    document.addEventListener('touchend', releaseTouch, false);
+
+    var xDown = null;
+    var yDown = null;
+    var direct = null;
+
+    function handleTouchStart(evt) {
+        const firstTouch = evt.touches[0];
+        xDown = firstTouch.clientX;
+        yDown = firstTouch.clientY;
+    };
+
+    function handleTouchMove(evt) {
+        if (!xDown || !yDown) {
+            return;
+        }
+
+        var xUp = evt.touches[0].clientX;
+        var yUp = evt.touches[0].clientY;
+
+        var xDiff = xDown - xUp;
+        var yDiff = yDown - yUp;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            document.getElementById("articles").style.transform = "translateX(" + (-xDiff) + "px)"
+            if (xDiff > 0.3 * window.innerWidth) {
+                direct = 1;
+                return
+            } else {
+                if (xDiff < -0.3 * window.innerWidth) {
+                    direct = -1;
+                    return;
+                }
+            }
+        }
+    }
+
+    function releaseTouch() {
+        document.getElementById("articles").style.transform = "translateX(0px)"
+        if (direct) {
+            clearTimeout(touch)
+            document.getElementById("lottie").style.display = "none"
+            swipe(direct);
+        }
+        direct = null;
+        return
+    }
+
+    function swipe(direct) {
+        document.getElementById("articles").style.transform = "translateX(0px)"
+        for (i in Object.keys(dictionary)) {
+            if (Object.keys(dictionary)[i] == currentsite) {
+                var sum = parseInt(i) + direct + Object.keys(dictionary).length;
+                var idx = sum % Object.keys(dictionary).length
+                currentsite = Object.keys(dictionary)[idx];
+
+                document.getElementById("footer").style.display = "none"
+                page(currentsite)
+                return;
+            }
+        }
+    }
+
+    function requestGetJSON(url, onload) {
+        requestGet(url, function (data) {
+            if (data.currentTarget.status >= 200 && data.currentTarget.status < 400) {
+                var items = JSON.parse(data.currentTarget.response)
+                onload(items)
+            }
+        }, () => {
+            console.log("daten nicht gefunden")
+        });
+    }
+
+    function requestGet(url, onload, onerror) {
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.onload = onload.bind(request);
+        request.onerror = onerror;
+        request.send()
+    }
+
+    var animation = bodymovin.loadAnimation({
+        container: document.getElementById('lottie'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/icons/data.json'
+    })
+    console.log(animation)
+
+
+</script>
+
+</html>
