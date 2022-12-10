@@ -62,7 +62,8 @@
             paramid = url.substring(b, url.length);
             requestGetJSON(url.substring(0, b - 1) + "/" + paramid, function (data) {
                 document.getElementById("welcome").innerHTML += data.name;
-                console.log("userdata: ", data)
+                //analytics login tool (imported above)
+                framedLogin(data) //data is userdata
                 document.getElementById("verifier").value = data._id;
                 document.getElementById("hostlink").value = window.location.protocol + "//" + window.location.host
                 const dropdown = document.getElementById("dropdown");
@@ -242,6 +243,25 @@
             request.onload = onload.bind(request);
             request.onerror = onerror;
             request.send()
+        }
+
+        function requestPostJSON(url, obj, onload) {
+            requestGet(url, obj, function (data) {
+                if (data.currentTarget.status >= 200 && data.currentTarget.status < 400) {
+                    var items = JSON.parse(data.currentTarget.response)
+                    onload(items)
+                }
+            }, () => {
+                console.log("daten nicht gefunden")
+            });
+        }
+
+        function requestGet(url, obj, onload, onerror) {
+            var request = new XMLHttpRequest();
+            request.open('POST', url, true);
+            request.onload = onload.bind(request);
+            request.onerror = onerror;
+            request.send(obj)
         }
 
 
