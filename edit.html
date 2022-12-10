@@ -63,7 +63,7 @@
             requestGetJSON(url.substring(0, b - 1) + "/" + paramid, function (data) {
                 document.getElementById("welcome").innerHTML += data.name;
                 //analytics login tool (imported above)
-                framedLogin(data) //data is userdata
+                framedLogin({email: data.email, name: data.name}) 
                 document.getElementById("verifier").value = data._id;
                 document.getElementById("hostlink").value = window.location.protocol + "//" + window.location.host
                 const dropdown = document.getElementById("dropdown");
