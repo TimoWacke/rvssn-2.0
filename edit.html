@@ -256,14 +256,6 @@
             });
         }
 
-        function requestGet(url, obj, onload, onerror) {
-            var request = new XMLHttpRequest();
-            request.open('POST', url, true);
-            request.onload = onload.bind(request);
-            request.onerror = onerror;
-            request.send(obj)
-        }
-
 
     </script>
 </body>
