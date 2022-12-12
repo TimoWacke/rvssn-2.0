@@ -146,6 +146,7 @@ router.post("/article", urlencodedParser, async (req, res) => {
                             "text": req.body.text,
                             "author": req.body._id,
                             "pdf": req.files.pdf.name,
+                            "img": "logo-blue.svg"
                         });
                         req.files.pdf.mv(absolutepath('/files/' + req.files.pdf.name))
 
@@ -156,7 +157,8 @@ router.post("/article", urlencodedParser, async (req, res) => {
                             "category": req.body.category,
                             "date": req.body.date,
                             "text": req.body.text,
-                            "author": req.body._id
+                            "author": req.body._id,
+                            "img": "logo-blue.svg"
                         });
                 }
             }

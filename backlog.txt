@@ -1,3 +1,5 @@
 Edit Button
 Impressum
 hide Datum option für Artikel
+Bilder komprimieren nach userupload
+Doppelbilder/Überschreiben nicht ermöglichen
