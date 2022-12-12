@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Open%20Sans");
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Open Sans';
     margin: 0px;
 }
 
@@ -34,7 +36,6 @@ body.dev {
 #navbar button {
     font-size: 20px;
     background: transparent;
-    font-family: Segoe UI, Segoe;
     font-weight: bold;
     padding: 30px 25px 15px;
     border-style: none;
@@ -145,7 +146,8 @@ hr {
     color: #000;
 }
 
-.item-wrapper h2, p {
+.item-wrapper h2,
+p {
     margin: 0px 0px 10px;
 }
 
@@ -194,7 +196,8 @@ hr {
     display: inline-block;
 }
 
-#footer a, #footer p {
+#footer a,
+#footer p {
     margin: 2px;
     padding: 2px;
     display: block;
@@ -202,9 +205,10 @@ hr {
     color: #fff;
 }
 
-h1, h2, #navbar button {
+h1,
+h2,
+#navbar button {
     font-weight: bold;
-    font-family: 'Segoe UI',
 }
 
 form#edit {
@@ -286,7 +290,8 @@ div.horizontal.space {
     padding: 0px 20px;
 }
 
-#topper.login, #topper.dev {
+#topper.login,
+#topper.dev {
     margin-bottom: 20px;
 }
 
@@ -297,7 +302,8 @@ form select {
     border-width: 0px;
 }
 
-form input, form textarea {
+form input,
+form textarea {
     margin: 10px 0px;
     padding: 5px;
 }
@@ -355,7 +361,10 @@ form textarea {
     color: #fff;
 }
 
-form#edit input[type="text"], form#edit input[type="date"], input[type="checkbox"], form#edit textarea {
+form#edit input[type="text"],
+form#edit input[type="date"],
+input[type="checkbox"],
+form#edit textarea {
     margin-left: 10px;
     background: #fff;
 }
@@ -368,7 +377,10 @@ form button {
     background: rgb(255, 22, 115)
 }
 
-form input[type="text"], form input[type="date"], form textarea, .container button {
+form input[type="text"],
+form input[type="date"],
+form textarea,
+.container button {
     border-radius: 4px;
     padding: 5px;
     border-width: 0px;
@@ -386,10 +398,12 @@ form input[type="text"], form input[type="date"], form textarea, .container butt
     h1 {
         font-size: 24px;
     }
+
     body.dev {
         padding: 0px 10px;
         margin: 25px
     }
+
     #lottie {
         display: block;
         margin: 10px auto 0px;
@@ -402,13 +416,16 @@ form input[type="text"], form input[type="date"], form textarea, .container butt
         animation-delay: 0.2s;
         opacity: 66%;
     }
+
     @keyframes touch {
         0% {
             transform: translateX(75px);
         }
+
         70% {
             transform: translateX(0px);
         }
+
         100% {
             transform: translateX(75px);
         }
@@ -421,71 +438,91 @@ form input[type="text"], form input[type="date"], form textarea, .container butt
         align-items: center;
         padding: 0px;
     }
+
     h1 {
         font-size: 24px;
     }
+
     .item-wrapper h2 {
         font-size: 20px;
     }
+
     form#login {
         flex-direction: column;
     }
+
     form#login input {
         width: calc(100% - 10px);
         margin-right: 0px;
     }
-    .container, #hero {
+
+    .container,
+    #hero {
         width: 90%;
     }
+
     #hero {
         margin: 0px;
         height: 61vw;
         border-radius: 0px;
     }
+
     #logoside h1 {
         margin-left: 10px;
     }
+
     #header {
         display: none;
     }
+
     .item-wrapper {
         margin: 20px 0px;
     }
+
     .item-wrapper img {
         width: 65px;
         height: 65px;
         margin: 10px;
         object-fit: cover;
     }
+
     .details {
         flex-direction: column;
         width: 100%;
         margin-bottom: 5px;
     }
-    .item-wrapper .date, .category {
+
+    .item-wrapper .date,
+    .category {
         width: 100%;
         padding: 0px;
         margin-bottom: 5px;
         display: inline-block;
         text-align: left;
     }
+
     .item-wrapper .description {
         margin-left: -75px;
     }
+
     #topper {
         margin: 20px 0px;
     }
+
     #footer {
         padding: 10%;
     }
+
     .dev .container {
         margin: 10px 0px;
         padding: 0px 10px;
         width: 100%;
     }
+
     .main.dev {
         flex-direction: column;
     }
+
     .dev form div {
         flex-direction: column;
     }

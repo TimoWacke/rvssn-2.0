@@ -42,12 +42,16 @@ router.get("/dev/img/collection/:path", (req, res) => {
 });
 
 router.get("/delete/:postid/:devid", async (req, res) => {
-    console.log("deleting post")
-    const checkpost = await Article.findById(req.params.postid)
-    if (checkpost.author = req.params.devid) {
-        await Article.deleteOne({ "_id": req.params.postid })
-        res.send("deleted")
-    } else {
+    try {
+        console.log("deleting post")
+        const checkpost = await Article.findById(req.params.postid)
+        if (checkpost.author == req.params.devid) {
+            await Article.deleteOne({ "_id": req.params.postid })
+            res.send({ msg: "deleted" })
+            return
+        }
+        res.sendStatus(403)
+    } catch {
         res.send("did not work for you")
     }
 })
@@ -113,7 +117,7 @@ router.post("/article", urlencodedParser, async (req, res) => {
                 req.files.pdf.mv(absolutepath('/files/' + req.files.pdf.name))
                 fs.writeFile(absolutepath("/img/collection/" + req.body.imgnme), decodeBase64Image(req.body.imgsrc).data, 'base64', function (err) { if (err) { console.log("while saving encoded image err: " + err); } else { console.log("encoded image successfully") } });
 
-            } catch(err) {
+            } catch (err) {
                 if (req.body.imgnme) {
                     newArticle = new Article({
                         "section": req.body.section,
@@ -193,14 +197,14 @@ router.get("/pdf/:id", (req, res) => {
 
 router.get("/file/:id", (req, res) => {
     console.log(req.params.id)
-    fileName = req.params.id.replace(/\s/,'%20')
-    fileName = fileName.replace(/\s/,'%20')
+    fileName = req.params.id.replace(/\s/, '%20')
+    fileName = fileName.replace(/\s/, '%20')
     console.log(fileName)
     pdfurl = "https://rvssn.de/pdf/" + fileName;
     console.log(pdfurl)
     res.send('<body style="margin:0px;padding:0px;overflow:hidden;"><iframe id="iframe" style="width:100%;" frameborder="0"></iframe>' +
 
-    '<script>document.getElementById("iframe").setAttribute("src", "https://docs.google.com/gview?url=' + pdfurl + '&embedded=true");</script>' +
+        '<script>document.getElementById("iframe").setAttribute("src", "https://docs.google.com/gview?url=' + pdfurl + '&embedded=true");</script>' +
         '<script>document.getElementById("iframe").style.height = window.innerHeight</script>' +
         '</body>')
 })
