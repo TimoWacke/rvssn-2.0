@@ -146,7 +146,7 @@ router.post("/article", urlencodedParser, async (req, res) => {
                             "text": req.body.text,
                             "author": req.body._id,
                             "pdf": req.files.pdf.name,
-                            "img": "logo-blue.svg"
+                            "img": " logo-blue_white1x1background.png"
                         });
                         req.files.pdf.mv(absolutepath('/files/' + req.files.pdf.name))
 
@@ -158,7 +158,7 @@ router.post("/article", urlencodedParser, async (req, res) => {
                             "date": req.body.date,
                             "text": req.body.text,
                             "author": req.body._id,
-                            "img": "logo-blue.svg"
+                            "img": " logo-blue_white1x1background.png"
                         });
                 }
             }
