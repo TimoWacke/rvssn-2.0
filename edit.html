@@ -63,7 +63,7 @@
             requestGetJSON(url.substring(0, b - 1) + "/" + paramid, function (user) {
                 document.getElementById("welcome").innerHTML += user.name;
                 //analytics login tool (imported above)
-                framedLogin({email: data.email, name: data.name}) 
+                framedLogin({ email: user.email, name: user.name })
                 document.getElementById("verifier").value = user._id;
                 document.getElementById("hostlink").value = window.location.protocol + "//" + window.location.host
                 const dropdown = document.getElementById("dropdown");
@@ -110,7 +110,7 @@
                     document.getElementById("articles").innerHTML += '<div class="horizontal space">' +
                         '<div class="item-wrapper"><img src="img/collection/' + items[i].img + '" alt="vorschaubild" class="itemimg"><div class="content"><div class="details"><p class="category">'
                         + items[i].category + '</p><p class="date">' + items[i].date + '</p></div><h2>' + items[i].header + '</h2><p class="description">' + items[i].text + '</p><a href="/file/' + items[i].pdf + '">weiterlesen...</a></div></div>' +
-                    '<button onclick="deletePost(\'' + items[i]._id + '\')">löschen</button></div>'
+                        '<button onclick="deletePost(\'' + items[i]._id + '\')">löschen</button></div>'
                 }
             });
         }
