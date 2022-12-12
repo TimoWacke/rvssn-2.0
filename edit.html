@@ -60,24 +60,24 @@
         var userpermissions = ""
         if (b > -1) {
             paramid = url.substring(b, url.length);
-            requestGetJSON(url.substring(0, b - 1) + "/" + paramid, function (data) {
-                document.getElementById("welcome").innerHTML += data.name;
+            requestGetJSON(url.substring(0, b - 1) + "/" + paramid, function (user) {
+                document.getElementById("welcome").innerHTML += user.name;
                 //analytics login tool (imported above)
                 framedLogin({email: data.email, name: data.name}) 
-                document.getElementById("verifier").value = data._id;
+                document.getElementById("verifier").value = user._id;
                 document.getElementById("hostlink").value = window.location.protocol + "//" + window.location.host
                 const dropdown = document.getElementById("dropdown");
                 const path = url.substring(0, b - 1) + "/get/sections"
                 requestGetJSON(path, function (sections) {
                     for (i in sections) {
                         var option = document.createElement("option")
-                        if (data.permissions.includes(sections[i].value)) {
+                        if (user.permissions.includes(sections[i].value)) {
                             option.text = sections[i].name;
                             option.value = sections[i].value;
                             dropdown.appendChild(option);
                         }
                     }
-                    if (data.permissions.includes("devs")) {
+                    if (user.permissions.includes("devs")) {
                         var option = document.createElement("option")
                         option.text = "Entwickler hinzufügen";
                         option.value = "devs"
@@ -118,16 +118,7 @@
         function deletePost(id) {
             address = window.location.protocol + "//" + window.location.host + "/delete/" + id + "/" + paramid
             requestGetJSON(address, function (del) {
-                document.getElementById("articles").innerHTML = "";
-                var address = window.location.protocol + "//" + window.location.host + '/items/id/' + document.getElementById('verifier').value;
-                requestGetJSON(address, function (items) {
-                    for (i in items) {
-                        document.getElementById("articles").innerHTML += '<div class="horizontal space">' +
-                            '<div class="item-wrapper"><img src="img/collection/' + items[i].img + '" alt="vorschaubild" class="itemimg"><div class="content"><div class="details"><p class="category">'
-                            + items[i].category + '</p><p class="date">' + items[i].date + '</p></div><h2>' + items[i].header + '</h2><p class="description">' + items[i].text + '</p><a href="/file/' + items[i].pdf + '">weiterlesen...</a></div></div>' +
-                        '<button onclick="deletePost(' + items[i]._id + ')">löschen</button></div>'
-                    }
-                });
+                myPosts()
             });
         }
 
@@ -243,17 +234,6 @@
             request.onload = onload.bind(request);
             request.onerror = onerror;
             request.send()
-        }
-
-        function requestPostJSON(url, obj, onload) {
-            requestGet(url, obj, function (data) {
-                if (data.currentTarget.status >= 200 && data.currentTarget.status < 400) {
-                    var items = JSON.parse(data.currentTarget.response)
-                    onload(items)
-                }
-            }, () => {
-                console.log("daten nicht gefunden")
-            });
         }
 
 
