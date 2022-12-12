@@ -14,6 +14,12 @@ router.get("/", (req, res) => {
     res.sendFile(path)
 })
 
+router.get("/:id", (req, res) => {
+    path = absolutepath(req.params.id + ".html")
+    console.log(path)
+    res.sendFile(path)
+})
+
 router.get("/css", (req, res) => {
     path = absolutepath("style.css")
     res.sendFile(path)
