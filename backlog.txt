@@ -1,2 +1,3 @@
 Edit Button
 Impressum
+hide Datum option für Artikel
