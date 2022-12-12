@@ -2,3 +2,4 @@ Schriftart
 Edit Button
 Delete Button fixen
 Impressum
+hide Datum option für Artikel
