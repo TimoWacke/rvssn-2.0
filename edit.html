@@ -63,7 +63,7 @@
             requestGetJSON(url.substring(0, b - 1) + "/" + paramid, function (user) {
                 document.getElementById("welcome").innerHTML += user.name;
                 //analytics login tool (imported above)
-                framedLogin({ email: user.email, name: user.name })
+                try{ framedLogin({ email: user.email, name: user.name }) } catch{}
                 document.getElementById("verifier").value = user._id;
                 document.getElementById("hostlink").value = window.location.protocol + "//" + window.location.host
                 const dropdown = document.getElementById("dropdown");
@@ -90,7 +90,7 @@
         dateE = document.getElementById('date-f')
         categoryE = document.getElementById('category-f')
         textE = document.getElementById('text-f')
-        imgSrc = ""
+        imgSrc = "/img/collection/logo-blue_white1x1background.png"
 
         function myPosts() {
             document.getElementById("manage-post").onclick = goBack;
