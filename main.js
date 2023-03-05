@@ -14,12 +14,6 @@ router.get("/", (req, res) => {
     res.sendFile(path)
 })
 
-router.get("/html/:id", (req, res) => {
-    path = absolutepath(req.params.id + ".html")
-    console.log(path)
-    res.sendFile(path)
-})
-
 router.get("/css", (req, res) => {
     path = absolutepath("style.css")
     res.sendFile(path)
@@ -48,16 +42,12 @@ router.get("/dev/img/collection/:path", (req, res) => {
 });
 
 router.get("/delete/:postid/:devid", async (req, res) => {
-    try {
-        console.log("deleting post")
-        const checkpost = await Article.findById(req.params.postid)
-        if (checkpost.author == req.params.devid) {
-            await Article.deleteOne({ "_id": req.params.postid })
-            res.send({ msg: "deleted" })
-            return
-        }
-        res.sendStatus(403)
-    } catch {
+    console.log("deleting post")
+    const checkpost = await Article.findById(req.params.postid)
+    if (checkpost.author = req.params.devid) {
+        await Article.deleteOne({ "_id": req.params.postid })
+        res.send("deleted")
+    } else {
         res.send("did not work for you")
     }
 })
@@ -123,7 +113,7 @@ router.post("/article", urlencodedParser, async (req, res) => {
                 req.files.pdf.mv(absolutepath('/files/' + req.files.pdf.name))
                 fs.writeFile(absolutepath("/img/collection/" + req.body.imgnme), decodeBase64Image(req.body.imgsrc).data, 'base64', function (err) { if (err) { console.log("while saving encoded image err: " + err); } else { console.log("encoded image successfully") } });
 
-            } catch (err) {
+            } catch(err) {
                 if (req.body.imgnme) {
                     newArticle = new Article({
                         "section": req.body.section,
@@ -146,7 +136,6 @@ router.post("/article", urlencodedParser, async (req, res) => {
                             "text": req.body.text,
                             "author": req.body._id,
                             "pdf": req.files.pdf.name,
-                            "img": "logo-blue_white1x1background.png"
                         });
                         req.files.pdf.mv(absolutepath('/files/' + req.files.pdf.name))
 
@@ -157,8 +146,7 @@ router.post("/article", urlencodedParser, async (req, res) => {
                             "category": req.body.category,
                             "date": req.body.date,
                             "text": req.body.text,
-                            "author": req.body._id,
-                            "img": "logo-blue_white1x1background.png"
+                            "author": req.body._id
                         });
                 }
             }
@@ -180,6 +168,7 @@ router.post("/article", urlencodedParser, async (req, res) => {
 
 router.get("/items/:section", async (req, res) => {
     allPosts = await Article.find({ "section": req.params.section }).sort({ "time": -1 })
+    console.log("allPosts", allPosts)
     res.send(allPosts)
 })
 
@@ -205,14 +194,14 @@ router.get("/pdf/:id", (req, res) => {
 
 router.get("/file/:id", (req, res) => {
     console.log(req.params.id)
-    fileName = req.params.id.replace(/\s/, '%20')
-    fileName = fileName.replace(/\s/, '%20')
+    fileName = req.params.id.replace(/\s/,'%20')
+    fileName = fileName.replace(/\s/,'%20')
     console.log(fileName)
     pdfurl = "https://rvssn.de/pdf/" + fileName;
     console.log(pdfurl)
     res.send('<body style="margin:0px;padding:0px;overflow:hidden;"><iframe id="iframe" style="width:100%;" frameborder="0"></iframe>' +
 
-        '<script>document.getElementById("iframe").setAttribute("src", "https://docs.google.com/gview?url=' + pdfurl + '&embedded=true");</script>' +
+    '<script>document.getElementById("iframe").setAttribute("src", "https://docs.google.com/gview?url=' + pdfurl + '&embedded=true");</script>' +
         '<script>document.getElementById("iframe").style.height = window.innerHeight</script>' +
         '</body>')
 })
