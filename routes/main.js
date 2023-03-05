@@ -21,6 +21,7 @@ router.get("/html/:id", (req, res) => {
 })
 
 router.get("/css", (req, res) => {
+    console.log("css req from",  req.headers.referrer)
     path = absolutepath("style.css")
     res.sendFile(path)
 })
