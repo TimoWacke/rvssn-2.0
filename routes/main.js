@@ -31,19 +31,16 @@ router.get("/dev", (req, res) => {
 
 router.get("/img/banner/:path", (req, res) => {
     path = absolutepath("img/banner/" + req.params.path)
-    console.log("served img: " + path)
     res.sendFile(path)
 });
 
 router.get("/img/collection/:path", (req, res) => {
     path = absolutepath("img/collection/" + req.params.path)
-    console.log("served img: " + path)
     res.sendFile(path)
 });
 
 router.get("/dev/img/collection/:path", (req, res) => {
     path = absolutepath("img/collection/" + req.params.path)
-    console.log("served img: " + path)
     res.sendFile(path)
 });
 
