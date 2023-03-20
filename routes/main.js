@@ -105,24 +105,24 @@ router.post("/article", urlencodedParser, async (req, res) => {
                 );
                 return;
             }
-            console.log(req.body.imgnme)
-            const stringLength = decodeBase64Image(req.body.imgsrc).data.length - 'data:image/png;base64,'.length;
-            console.log("Filesize:", 4 * Math.ceil((stringLength / 3))*0.5624896334383812, ("bytes"))
-            var newArticle = null;
+            if (req.body.imgnme) {
+                console.log(req.body.imgnme)
+                const stringLength = decodeBase64Image(req.body.imgsrc).data.length - 'data:image/png;base64,'.length;
+                console.log("Filesize:", 4 * Math.ceil((stringLength / 3)) * 0.5624896334383812, ("bytes"))
+            }
+            let articleDict = {
+                "section": req.body.section,
+                "header": req.body.title,
+                "category": req.body.category,
+                "date": req.body.date,
+                "hideDate": req.body.hideDate = "on", "text": req.body.text,
+                "author": req.body._id,
+            }
+            if (req.body.hideDate == "on") {
+                articleDict["hideDate"] = true
+            }
             try {
-                newArticle = new Article({
-                    "section": req.body.section,
-                    "header": req.body.title,
-                    "category": req.body.category,
-                    "date": req.body.date,
-                    "text": req.body.text,
-                    "author": req.body._id,
-                    "pdf": req.files.pdf.name,
-                    "img": req.body.imgnme,
-                })
                 req.files.pdf.mv(absolutepath('/files/' + req.files.pdf.name))
-
-                
                 fs.writeFile(absolutepath("/img/collection/" + req.body.imgnme), decodeBase64Image(req.body.imgsrc).data, 'base64', function (err) {
                     if (err) {
                         console.log("while saving encoded image err: " + err);
@@ -130,50 +130,32 @@ router.post("/article", urlencodedParser, async (req, res) => {
                         console.log("encoded image successfully")
                     }
                 });
+                articleDict["pdf"] = req.files.pdf.name
+                articleDict["img"] = req.body.imgnme
+
 
             } catch (err) {
                 if (req.body.imgnme) {
-                    newArticle = new Article({
-                        "section": req.body.section,
-                        "header": req.body.title,
-                        "category": req.body.category,
-                        "date": req.body.date,
-                        "text": req.body.text,
-                        "author": req.body._id,
-                        "img": req.body.imgnme,
-                    });
+
                     fs.writeFile(absolutepath("/img/collection/" + req.body.imgnme), decodeBase64Image(req.body.imgsrc).data, 'base64', function (err) {
                         if (err) {
                             console.log("while saving encoded image err: " + err);
                         } else { console.log("encoded image successfully") }
                     });
-
+                    articleDict["img"] = req.body.imgnme
                 } else {
                     if (req.files != null) {
-                        newArticle = new Article({
-                            "section": req.body.section,
-                            "header": req.body.title,
-                            "category": req.body.category,
-                            "date": req.body.date,
-                            "text": req.body.text,
-                            "author": req.body._id,
-                            "pdf": req.files.pdf.name,
-                            "img": "logo-blue_white1x1background.png"
-                        });
+
                         req.files.pdf.mv(absolutepath('/files/' + req.files.pdf.name))
 
-                    } else
-                        newArticle = new Article({
-                            "section": req.body.section,
-                            "header": req.body.title,
-                            "category": req.body.category,
-                            "date": req.body.date,
-                            "text": req.body.text,
-                            "author": req.body._id,
-                            "img": "logo-blue_white1x1background.png"
-                        });
+                        articleDict["pdf"] = req.files.pdf.name
+                        articleDict["img"] = "logo-blue_white1x1background.png"
+                    } else {
+                        articleDict["img"] = "logo-blue_white1x1background.png"
+                    }
                 }
             }
+            const newArticle = new Article(articleDict)
             savedPost = await newArticle.save();
             res.send("<link rel='stylesheet' href='/css'><body class='dev'><div class='main dev'><div class='container response'>" +
                 "<p>erfolgreich in Datenbank geposted, der Artikel ist jetzt auf der Website</p>" +
@@ -353,8 +335,7 @@ function absolutepath(relativepath) {
 }
 
 function decodeBase64Image(dataString) {
-    console.log("dataString: ",
-        dataString.substring(0, 100))
+    dataString.substring(0, 100)
     var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     var response = {};
     if (matches.length !== 3) {
