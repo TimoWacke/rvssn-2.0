@@ -173,6 +173,7 @@
                 } else {
                     document.getElementById("rights").innerHTML = ""
                     document.getElementById("article-info").innerHTML = '<input oninput="refpre()" id="date-f" type="date" name="date" required>' +
+                        '<div id="hideDate"><input oninput="refpre()" type="checkbox" id="checkBox-date" name="hideDate"> <p> Datum ausblenden </p></div>' +
                         '<textarea oninput="refpre()" id="text-f" name="text" placeholder="ca. 150 Zeichen Vorschau text"' +
                         'required></textarea>' +
                         '<div id="pdf-tool" class="vertical">' +
@@ -197,7 +198,8 @@
             try {
                 document.getElementById('preview').innerHTML = '<div class="item-wrapper"><img src="' + imgSrc + '" alt="vorschaubild" id="imgR">'
                     + '<div class="content"><div class="details"><p class="category">'
-                    + categoryE.value + '</p><p class="date">' + dateE.value + '</p></div><h2>' + titleE.value
+                    + categoryE.value + '</p>' + 
+                    (document.getElementById("checkBox-date").checked ? '' : '<p class="date">' + dateE.value + '</p>') + '</div><h2>' + titleE.value
                     + '</h2><p class="description">' + textE.value + '</p><a id="weiterl" href="">weiterlesen...</a></div></div>'
                 if (!document.getElementById("pdf-f").files[0]) {
                     document.getElementById("weiterl").innerHTML = ""

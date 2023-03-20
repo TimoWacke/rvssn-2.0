@@ -169,6 +169,16 @@ p {
     text-underline-position: under;
 }
 
+#hideDate {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+#hideDate p {
+    margin-bottom: 0;
+}
+
 .item-wrapper .date {
     width: 50%;
     margin: 0px;
