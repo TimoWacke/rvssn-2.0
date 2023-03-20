@@ -1,4 +1,3 @@
-hide Datum option für Artikel
 Impressum
 Doppelbilder/Überschreiben nicht ermöglichen
 Vorschaubild vergrößern ermöglichen
