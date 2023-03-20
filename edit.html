@@ -63,7 +63,7 @@
             requestGetJSON(url.substring(0, b - 1) + "/" + paramid, function (user) {
                 document.getElementById("welcome").innerHTML += user.name;
                 //analytics login tool (imported above)
-                try{ framedLogin({ email: user.email, name: user.name }) } catch{}
+                try { framedLogin({ email: user.email, name: user.name }) } catch { }
                 document.getElementById("verifier").value = user._id;
                 document.getElementById("hostlink").value = window.location.protocol + "//" + window.location.host
                 const dropdown = document.getElementById("dropdown");
@@ -138,7 +138,7 @@
                 refpre();
                 imgS.onload = function (e) {
                     const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 400;
+                    const MAX_WIDTH = 900;
                     const scaleSize = MAX_WIDTH / e.target.width;
                     canvas.width = MAX_WIDTH
                     canvas.height = e.target.height * scaleSize;
@@ -235,6 +235,15 @@
             request.onerror = onerror;
             request.send()
         }
+
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (event) {
+            // das Bild aus dem Formular entfernen
+            const input = document.querySelector('input[type="file"][accept^="image"]');
+            input.value = null;
+            console.log("bild wurde entfernt")
+        });
 
 
     </script>
