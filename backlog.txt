@@ -1,7 +1,7 @@
-Edit Button
-Impressum
 hide Datum option für Artikel
-Bilder komprimieren nach userupload
+Impressum
 Doppelbilder/Überschreiben nicht ermöglichen
-Gallerie
+Bilder komprimieren nach userupload
 Vorschaubild vergrößern ermöglichen
+Gallerie
+Edit Button

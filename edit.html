@@ -177,10 +177,10 @@
                         'required></textarea>' +
                         '<div id="pdf-tool" class="vertical">' +
                         '<label>pdf Anhang</label>' +
-                        '<input oninput="refpre()" id="pdf-f" type="file" name="pdf"></div>' +
+                        '<input oninput="refpre()" id="pdf-f" type="file" name="pdf" accept="application/pdf"></div>' +
                         '<div id="img-tool" class="vertical">' +
                         '<label>Vorschaubild</label>' +
-                        '<input oninput="refimg()" id="img-f" type="file" name="img"></div>'
+                        '<input oninput="refimg()" id="img-f" type="file" name="img" accept="image/*"></div>'
                     categoryE.placeholder = "Kategorie: z.B. 'Regatta' oder 'Training'";
                     titleE.placeholder = "Überschrift"
                     textE = document.getElementById('text-f')
