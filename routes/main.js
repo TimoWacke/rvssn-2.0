@@ -21,7 +21,7 @@ router.get("/html/:id", (req, res) => {
 })
 
 router.get("/css", (req, res) => {
-    console.log("css req from",  req.get('Referrer'))
+    console.log("css req from", req.get('Referrer'))
     path = absolutepath("style.css")
     res.sendFile(path)
 })
@@ -106,6 +106,8 @@ router.post("/article", urlencodedParser, async (req, res) => {
                 return;
             }
             console.log(req.body.imgnme)
+            const stringLength = decodeBase64Image(req.body.imgsrc).data.length - 'data:image/png;base64,'.length;
+            console.log("Filesize:", 4 * Math.ceil((stringLength / 3))*0.5624896334383812, ("bytes"))
             var newArticle = null;
             try {
                 newArticle = new Article({
@@ -119,7 +121,15 @@ router.post("/article", urlencodedParser, async (req, res) => {
                     "img": req.body.imgnme,
                 })
                 req.files.pdf.mv(absolutepath('/files/' + req.files.pdf.name))
-                fs.writeFile(absolutepath("/img/collection/" + req.body.imgnme), decodeBase64Image(req.body.imgsrc).data, 'base64', function (err) { if (err) { console.log("while saving encoded image err: " + err); } else { console.log("encoded image successfully") } });
+
+                
+                fs.writeFile(absolutepath("/img/collection/" + req.body.imgnme), decodeBase64Image(req.body.imgsrc).data, 'base64', function (err) {
+                    if (err) {
+                        console.log("while saving encoded image err: " + err);
+                    } else {
+                        console.log("encoded image successfully")
+                    }
+                });
 
             } catch (err) {
                 if (req.body.imgnme) {
@@ -132,7 +142,11 @@ router.post("/article", urlencodedParser, async (req, res) => {
                         "author": req.body._id,
                         "img": req.body.imgnme,
                     });
-                    fs.writeFile(absolutepath("/img/collection/" + req.body.imgnme), decodeBase64Image(req.body.imgsrc).data, 'base64', function (err) { if (err) { console.log("while saving encoded image err: " + err); } else { console.log("encoded image successfully") } });
+                    fs.writeFile(absolutepath("/img/collection/" + req.body.imgnme), decodeBase64Image(req.body.imgsrc).data, 'base64', function (err) {
+                        if (err) {
+                            console.log("while saving encoded image err: " + err);
+                        } else { console.log("encoded image successfully") }
+                    });
 
                 } else {
                     if (req.files != null) {
