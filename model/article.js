@@ -17,6 +17,10 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    hideDate: {
+        type: Boolean,
+        required: false,
+    },  
     text: {
         type: String,
         required: true,

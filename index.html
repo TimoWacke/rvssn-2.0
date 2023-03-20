@@ -126,16 +126,9 @@
         requestGetJSON(address, function (items) {
             document.getElementById("articles").innerHTML = "";
             for (i in items) {
-
-                if (items[i].pdf) {
-                    document.getElementById("articles").innerHTML += '<div class="item-wrapper"><img src="img/collection/' + items[i].img + '" alt="" class="itemimg"><div class="content"><div class="details"><p class="category">'
-                        + items[i].category + '</p><p class="date">' + items[i].date + '</p></div><h2>' + items[i].header + '</h2><p class="description">' + items[i].text + '</p><a href="/file/' + items[i].pdf + '">weiterlesen...</a></div></div>'
-                } else {
-                    document.getElementById("articles").innerHTML += '<div class="item-wrapper"><img src="img/collection/' + items[i].img + '" alt="" class="itemimg"><div class="content"><div class="details"><p class="category">'
-                        + items[i].category + '</p><p class="date">' + items[i].date + '</p></div><h2>' + items[i].header + '</h2><p class="description">' + items[i].text + '</p></div></div>'
-                }
+                document.getElementById("articles").innerHTML += '<div class="item-wrapper"><img src="img/collection/' + items[i].img + '" alt="" class="itemimg"><div class="content"><div class="details"><p class="category">'
+                    + items[i].category + '</p>' + (items[i].hideDate ? '' : '<p class="date">' + items[i].date + '</p>') + '</div><h2>' + items[i].header + '</h2><p class="description">' + items[i].text + '</p>' + (items[i].pdf ? '<a href="/file/' + items[i].pdf + '">weiterlesen...</a>' : '') + '</div></div>'
             }
-
         });
         setTimeout(function () { document.getElementById("footer").style.display = "flex" }, 1000)
     }

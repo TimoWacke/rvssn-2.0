@@ -1,7 +1,6 @@
 hide Datum option für Artikel
 Impressum
 Doppelbilder/Überschreiben nicht ermöglichen
-Bilder komprimieren nach userupload
 Vorschaubild vergrößern ermöglichen
 Gallerie
 Edit Button
