@@ -1,9 +1,7 @@
 .env
 node_modules
-files
 *.psd
 *.psb
 mockup/3d
-img/collection/*
 img/gallery/*
 package*.json
