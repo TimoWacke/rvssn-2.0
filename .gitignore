@@ -1,9 +1,0 @@
-.env
-node_modules
-*.psd
-*.psb
-mockup/3d
-img/gallery/*
-package*.json
-*.DS_Store
-.DS_Store

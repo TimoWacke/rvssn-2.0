@@ -1,9 +1,0 @@
-{
-    "script": "index.js",
-    "watch": true,
-    "ignore_watch": ["img", "files"],
-    "watch_options": {
-        "followSymlinks": false
-    },
-    "name": "RVSNN-2.0"
-}
