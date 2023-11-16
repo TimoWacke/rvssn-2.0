@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>www.RVSSN.de</title>
+<title>RVSSN</title>
 <link rel="shortcut icon" href="/img/favicon.png" type="image/png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script async onerror="console.error('Analytics SDK failed to load')" src="https://framed.timopictur.es/analytics/utils/76EGqqlZjsIglFWQ"></script>
 	<!-- GOOGLE W&ouml;RTER !-->
 <meta name="keywords" content="RVSSN, Segeln, Südniedersachsen">
 <style>
@@ -53,7 +54,6 @@ min-height: 400px;
 background-attachment: scroll;
 } 
 }
-
 /* Kontaktkarte */
 
 .card {
@@ -110,10 +110,11 @@ justify-content: center;
 <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
 <i class="fa fa-bars"></i>
 </a>
-<a href="http://www.ag-kapelle-lütgenrode.de" class="w3-bar-item w3-text-black w3-button">HOME</a>
+<a href="http://www.RVSSN.de/" class="w3-bar-item w3-text-black w3-button">HOME</a>
 <a href="#about" class="w3-bar-item w3-text-black w3-button w3-hide-small"><i class="fa fa-user"></i> RVSSN</a>
 <a href="#portfolio" class="w3-bar-item w3-text-black w3-button w3-hide-small"><i class="fa fa-th"></i> VEREINE</a>
-<a href="#aktuell" class="w3-bar-item w3-text-black w3-button w3-hide-small">AKTUELL</a>
+<a href="#aktuell" class="w3-bar-item w3-text-black w3-button w3-hide-small"><i class="fa fa-spinner"></i>AKTUELL</a>
+<a href="#termine" class="w3-bar-item w3-text-black w3-button w3-hide-small"><i class="fa fa-clock-o"></i>TERMINE</a>
 <a href="#contact" class="w3-bar-item w3-text-black w3-button w3-hide-small"><i class="fa fa-envelope"></i> KONTAKT</a>
 </div>
 
@@ -122,6 +123,7 @@ justify-content: center;
 <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">RVSSN</a>
 <a href="#portfolio" class="w3-bar-item w3-button" onclick="toggleFunction()">VEREINE</a>
 <a href="#aktuell" class="w3-bar-item w3-button" onclick="toggleFunction()">AKTUELL</a>
+<a href="#termine" class="w3-bar-item w3-button" onclick="toggleFunction()">TERMINE</a>
 <a href="#contact" class="w3-bar-item w3-button" onclick="toggleFunction()">KONTAKT</a>
 </div>
 </div>
@@ -129,7 +131,7 @@ justify-content: center;
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
 <div class="w3-display-bottommiddle" style="white-space:nowrap;">
-<span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"><img src="/img/logo-blue.svg" style="width:10%"> RVSSN</span>
+<span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"><img src="/img/logo-blue.svg" style="width:5%"> RVSSN</span>
 </div>
 </div>
 
@@ -150,7 +152,7 @@ Wir überarbeiten gerade diese Seite...<br>
 <!-- Second Parallax Image with Portfolio Text -->
 <div class="bgimg-2 w3-display-container w3-opacity-min">
 <div class="w3-display-middle">
-<span class="w3-xxlarge w3-text-dark-grey w3-wide">Vereine</span>
+<span class="w3-xxlarge w3-text-white w3-wide">VEREINE</span>
 </div>
 </div>
 	
@@ -164,37 +166,69 @@ Wir überarbeiten gerade diese Seite...<br>
 <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
 <div class="w3-row-padding w3-center">
 <div class="w3-col m3">
-<img src="/img/V1.jpg" style="width:100%">
+<a href="http://www.NSC.de" style="text-decoration: none"><img src="/img/Vereine/NSC.svg" style="width:100%"><br>
+Northeimer Segelclub e.V.</a>
 </div>
 
 <div class="w3-col m3">
-<img src="/img/V2.jpg" style="width:100%">
+<a href="http://www.svss.de" style="text-decoration: none"><img src="/img/Vereine/svss.png" style="width:100%">
+Segler-Vereinigung Seeburger See</a>
 </div>
 
 <div class="w3-col m3">
-<img src="/img/V3.jpg" style="width:100%">
+<a href="http://www.wsvi.net/" style="text-decoration: none"><img src="/img/Vereine/wsvi.png" style="width:100%"><br>
+Wassersportverein Innerstetalsperre e.V.</a>
 </div>
 
 <div class="w3-col m3">
-<img src="/img/V4.jpg" style="width:100%">
+<a href="http://www.dsv.org" style="text-decoration: none"><img src="/img/Vereine/svbs.png" style="width:100%">Segler-Verein Braunschweig e. V.<br>
+</a>
 </div>
 </div>
+
 
 <div class="w3-row-padding w3-center w3-section">
 <div class="w3-col m3">
-<img src="/img/V5.jpg" style="width:100%">
+<a href="http://www.scsz.de" style="text-decoration: none"><img src="/img/Vereine/scsz.svg" style="width:100%"><br>
+Segel-Club Salzgitter e. V.</a>
 </div>
 
 <div class="w3-col m3">
-<img src="/img/V6.jpeg" style="width:100%">
+<a href="https://www.goettinger-segler.de" style="text-decoration: none"><img src="/img/Vereine/gsc.png" style="width:100%"><br>
+Göttinger Segler Club</a>
 </div>
 
 <div class="w3-col m3">
-<img src="/img/V7.jpg" style="width:100%">
+<a href="https://www.nf-bs.de" style="text-decoration: none"><img src="/img/Vereine/nfbs.png" style="width:100%"><br>
+NaturFreunden Braunschweig e.V.</a>
 </div>
 
 <div class="w3-col m3">
-<img src="/img/V8.jpg" style="width:100%">
+<a href="https://www.wscg.de" style="text-decoration: none"><img src="/img/Vereine/wscg.jpg" style="width:100%"><br>
+Wassersport-Club Gifhorn e.V.</a>
+</div>
+</div>
+
+	
+<div class="w3-row-padding w3-center w3-section">
+<div class="w3-col m3">
+<a href="https://www.vereinonline.org/WYCA/" style="text-decoration: none"><img src="/img/Vereine/wyc.png" style="width:100%"><br>
+Wolfsburger Yacht Club Allertal e.V.</a>
+</div>
+
+<div class="w3-col m3">
+<a href="https://www.RVSSN.de/" style="text-decoration: none"><img src="/img/Vereine/RVSSN.png" style="width:100%"><br>
+Regionalverband Segeln Südniedersachsen e.V.</a>
+</div>
+
+<div class="w3-col m3">
+<a href="https://www.segeln-niedersachsen.de" style="text-decoration: none"><img src="/img/Vereine/svn.png" style="width:100%"><br>
+Segler-Verband Niedersachsen e.V.</a>
+</div>
+
+<div class="w3-col m3">
+<a href="http://www.dsv.org" style="text-decoration: none"><img src="/img/Vereine/DSV.svg" style="width:100%"><br>
+DSV</a>
 </div>
 </div>
 </div>
@@ -211,7 +245,7 @@ Wir überarbeiten gerade diese Seite...<br>
 <h3 class="w3-center">AKTUELL</h3>
 <p class="w3-content">
 	
-<!-->
+<!--
 ART der Veranstaltung<br>
 Datum<br>
 
@@ -240,7 +274,7 @@ TEXT<br>
 
 	
 <hr>
-<!-->
+-->
 Breitensport Training<br>
 15.-16.8.2023<br>
 
@@ -319,15 +353,27 @@ Die Regattaergebnisse stehen im Netz unter Manage2sail:<br>
 <img src="/img/GIC14.jpg" style="width:100%">
 </td></tr>
 
-
 </table>
-
-	
-<hr>
-
 
 
 	</p>
+</div>
+	
+<!-- Second Parallax Image with Portfolio Text -->
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+<div class="w3-display-middle">
+<span class="w3-xxlarge w3-text-white w3-wide">TERMINE</span>
+</div>
+</div>
+
+<!-- Container (Aktuell) -->
+<div class="w3-content w3-container w3-padding-64" id="termine">
+<h3 class="w3-center">Termine</h3>
+<p class="w3-content">
+
+<img src="/img/Terminplan2024.pdf" style="width:100%">
+<p class="w3-center">Änderungen vorbehalten!</p>
+
 </div>
 
 <!-- Third Parallax Image with Portfolio Text -->
